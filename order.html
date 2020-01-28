@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Грузчики Киев</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="icon" type="image/png" href="image/1.png" sizes="32*32">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="container-2">
+        <a href="./index.html"><img src="image/13.png" class='cancel'></a>
+        <img src="image/14.png" class="about">
+        <div class="order">
+            <form method="POST" id="form">
+
+                <input type=" text" id="" name="user_name" placeholder="   Ф.И.О.">
+                <br>
+
+                <input type="text" id="" name="user_phone" placeholder="   Номер моб.">
+                <br>
+
+                <input type="text" id="" name="user_email" placeholder="   e-mail">
+                <br>
+
+                <input type="text" id="" name="workers" placeholder="   Количество работников">
+                <br>
+
+                <textarea name="comment" rows="8" placeholder="Коротко о заказе:
+1.Адрес
+2.Дата и время
+3.Что необходимо сделать
+4.Продолжительность работ"></textarea>
+                <br>
+                <input type="submit" name="submit" value="Submit">
+
+                <!--                <input type="image" src="image/15.png" class="button-2">-->
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Отправка данных на сервер
+        $('#form').trigger('reset');
+        $(function() {
+            'use strict';
+            $('#form').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: 'send.php',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    data: new FormData(this),
+                    success: function(msg) {
+                        console.log(msg);
+                        if (msg == 'ok') {
+                            alert('Сообщение отправлено');
+                            $('#form').trigger('reset'); // очистка формы
+                        } else {
+                            alert('Ошибка');
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+
+
+</html>
