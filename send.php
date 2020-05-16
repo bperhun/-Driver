@@ -12,8 +12,8 @@ $text = $_POST['comment'];
 $mail = new PHPMailer\PHPMailer\PHPMailer();
 try {
     $msg = "ok";
-    $mail->isSMTP();   
-    $mail->CharSet = "UTF-8";                                          
+    $mail->isSMTP();
+    $mail->CharSet = "UTF-8";
     $mail->SMTPAuth   = true;
 
     // Настройки вашей почты
@@ -25,16 +25,14 @@ try {
     $mail->setFrom('bogdankboy@gmail.com', 'Movingman'); // Адрес самой почты и имя отправителя
 
     // Получатель письма
-    $mail->addAddress('bperhun@gmail.com');  
+    $mail->addAddress('bperhun@gmail.com');
    // $mail->addAddress('youremail@gmail.com'); // Ещё один, если нужен
-
-
 
         // -----------------------
         // Само письмо
         // -----------------------
         $mail->isHTML(true);
-    
+
         $mail->Subject = 'Заголовок письма';
         $mail->Body    = "<b>Имя:</b> $name <br>
         <b>Почта:</b> $email<br><br>
@@ -45,11 +43,12 @@ try {
 if ($mail->send()) {
     echo "$msg";
 } else {
-echo "Сообщение не было отправлено. Неверно указаны настройки вашей почты";
+    echo $mail->ErrorInfo . "<br/>";
+    echo "Сообщение не было отправлено. Неверно указаны настройки вашей почты";
 }
 
 } catch (Exception $e) {
-    echo "Сообщение не было отправлено. Причина ошибки: {$mail->ErrorInfo}";
+    echo "Сообщение не было отправлено. Причина ошибки: {$mail->ErrorInfo} | {$e->getMessage()}";
 }
 
 ?>

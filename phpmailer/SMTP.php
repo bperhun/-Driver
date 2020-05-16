@@ -978,6 +978,7 @@ class SMTP
                 'SMTP ERROR: ' . $this->error['error'] . ': ' . $this->last_reply,
                 self::DEBUG_CLIENT
             );
+            throw new \Exception('SMTP ERROR: ' . $this->error['error'] . ': ' . $this->last_reply);
 
             return false;
         }
